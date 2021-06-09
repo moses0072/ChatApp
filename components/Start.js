@@ -11,7 +11,7 @@ export default class Start extends React.Component {
       backgroundColor: '',
     };
   }
-
+  //Force the user to enter a name
   onPressChat = (name, backgroundColor) => {
     if(name == '') {
       return Alert.alert('Please enter a nick Name.');
