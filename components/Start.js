@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, Button, TextInput, ImageBackground, StyleSheet, Alert } from 'react-native';
 import { TouchableOpacity } from "react-native-gesture-handler";
+
+//Background Image
 const image =require('../assets/Background-image.png');
 
 export default class Start extends React.Component {
@@ -21,7 +23,7 @@ export default class Start extends React.Component {
       backgroundColor: `${backgroundColor}`,
     });
   };
-
+// First screen view
   render() {
     return (
       <ImageBackground source={image} style={styles.image}>
@@ -40,6 +42,7 @@ export default class Start extends React.Component {
         </View>
 
         <View style={styles.chatButtonColor}>
+          {/* Choosing the background color */}
           <TouchableOpacity onPress={() => this.setState({ backgroundColor: "#090C08" })} width='70' style={styles.chatButton1}></TouchableOpacity>
           <TouchableOpacity onPress={() => this.setState({ backgroundColor: "#474056" })} width='70' style={[styles.chatButton1, styles.chatButton2]}></TouchableOpacity>
           <TouchableOpacity onPress={() => this.setState({ backgroundColor: "#8A95A5" })} style={[styles.chatButton1, styles.chatButton3]}></TouchableOpacity>
@@ -152,5 +155,4 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-
 });
