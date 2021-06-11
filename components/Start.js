@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, TextInput, ImageBackground, StyleSheet, Alert } from 'react-native';
+import { View, Text, Button, Platform, KeyboardAvoidingView, TextInput, ImageBackground, StyleSheet, Alert } from 'react-native';
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 //Background Image
@@ -42,21 +42,51 @@ export default class Start extends React.Component {
         </View>
 
         <View style={styles.chatButtonColor}>
-          {/* Choosing the background color */}
-          <TouchableOpacity onPress={() => this.setState({ backgroundColor: "#090C08" })} width='70' style={styles.chatButton1}></TouchableOpacity>
-          <TouchableOpacity onPress={() => this.setState({ backgroundColor: "#474056" })} width='70' style={[styles.chatButton1, styles.chatButton2]}></TouchableOpacity>
-          <TouchableOpacity onPress={() => this.setState({ backgroundColor: "#8A95A5" })} style={[styles.chatButton1, styles.chatButton3]}></TouchableOpacity>
-          <TouchableOpacity onPress={() => this.setState({ backgroundColor: "#B9C6AE" })} style={[styles.chatButton1, styles.chatButton4]}></TouchableOpacity>
+          {/* Choosing the background color and added accessibility */}
+          <TouchableOpacity
+            accessible={true}
+            accessibilityLabel='more options'
+            accessibilityHint='lets you choose the color chatinterface' 
+            onPress={() => this.setState({ backgroundColor: '#090C08' })}
+            style={styles.chatButton1}>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            accessible={true}
+            accessibilityLabel='More options'
+            accessibilityHint='Lets you choose the color chatinterface.'
+            onPress={() => this.setState({ backgroundColor: '#474056' })} 
+            style={[styles.chatButton1, styles.chatButton2]}>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            accessible={true}
+            accessibilityLabel='More options'
+            accessibilityHint='Lets you choose the color chatinterface.'
+            onPress={() => this.setState({ backgroundColor: '#8A95A5' })}
+            style={[styles.chatButton1, styles.chatButton3]}>  
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            accessible={true}
+            accessibilityLabel='More options'
+            accessibilityHint='Lets you choose the color chatinterface.'
+            onPress={() => this.setState({ backgroundColor: '#B9C6AE' })}
+            style={[styles.chatButton1, styles.chatButton4]}>
+          </TouchableOpacity>
+
         </View>   
-          <View style={styles.chatButton}>
-            <Button
-              title='start chatting'
-              color='#757083'
-              onPress={() => this.onPressChat(this.state.name, this.state.backgroundColor)}
-              //onPress={() => this.props.navigation.navigate("Chat", { name: this.state.name, backgroundColor: this.state.backgroundColor })}
-            />
-          </View>      
+          <TouchableOpacity
+            accessible={true}
+            accessibilityLabel='More options'
+            accessibilityHint='Lets you choose the color chatinterface.'
+            style={styles.chatButton}
+            onPress={() => this.onPressChat(this.state.name, this.state.backgroundColor)}>
+            <Text style={styles.chatbuttontext}>Start Chatting</Text>    
+          </TouchableOpacity>
+          { Platform.OS === 'android' ? <KeyboardAvoidingView behavior='height' /> : null }
         </View>
+
       </ImageBackground>
     )
   }
@@ -126,13 +156,22 @@ const styles = StyleSheet.create({
 
   chatButton: {
     fontWeight: '600',
+    marginTop: 10,
+    backgroundColor: '#757083',
     fontSize: 16,
     position: 'relative',
     marginRight: 'auto',
     marginLeft: 'auto',
     width: '88%',
-    borderRadius: 10,
+    borderRadius: 30,
     padding: 15,
+  },
+
+  chatbuttontext: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 16,
+    textAlign: 'center',
   },
 
   backgroundColorContainer: {
