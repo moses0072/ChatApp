@@ -13,11 +13,13 @@ export default class Chat extends React.Component {
   }
 
   componentDidMount() {
+    let userName = this.props.route.params.name;
+    this.props.navigation.setOptions({ title: userName });
     this.setState({
       messages: [
         {
           _id: 1,
-          text: 'Hello developer',
+          text: `Hello ${userName}`,
           createdAt: new Date(),
           user: {
             _id: 2,
@@ -59,9 +61,7 @@ export default class Chat extends React.Component {
     );
   }
   
-  render() {
-    let name = this.props.route.params.name;
-    this.props.navigation.setOptions({title: name});
+  render() {   
     let backgroundColor = this.props.route.params.backgroundColor;
 
     return (

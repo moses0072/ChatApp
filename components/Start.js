@@ -45,32 +45,32 @@ export default class Start extends React.Component {
           {/* Choosing the background color and added accessibility */}
           <TouchableOpacity
             accessible={true}
-            accessibilityLabel='more options'
-            accessibilityHint='lets you choose the color chatinterface' 
+            accessibilityLabel='Black Background'
+            accessibilityHint='let you choose the color background for your chat.' 
             onPress={() => this.setState({ backgroundColor: '#090C08' })}
             style={styles.chatButton1}>
           </TouchableOpacity>
 
           <TouchableOpacity 
             accessible={true}
-            accessibilityLabel='More options'
-            accessibilityHint='Lets you choose the color chatinterface.'
+            accessibilityLabel='purple Background'
+            accessibilityHint='let you choose the color background for your chat.'
             onPress={() => this.setState({ backgroundColor: '#474056' })} 
             style={[styles.chatButton1, styles.chatButton2]}>
           </TouchableOpacity>
 
           <TouchableOpacity 
             accessible={true}
-            accessibilityLabel='More options'
-            accessibilityHint='Lets you choose the color chatinterface.'
+            accessibilityLabel='Light blue background'
+            accessibilityHint='let you choose the color background for your chat.'
             onPress={() => this.setState({ backgroundColor: '#8A95A5' })}
             style={[styles.chatButton1, styles.chatButton3]}>  
           </TouchableOpacity>
 
           <TouchableOpacity
             accessible={true}
-            accessibilityLabel='More options'
-            accessibilityHint='Lets you choose the color chatinterface.'
+            accessibilityLabel='Green background'
+            accessibilityHint='let you choose the color background for your chat.'
             onPress={() => this.setState({ backgroundColor: '#B9C6AE' })}
             style={[styles.chatButton1, styles.chatButton4]}>
           </TouchableOpacity>
@@ -78,8 +78,8 @@ export default class Start extends React.Component {
         </View>   
           <TouchableOpacity
             accessible={true}
-            accessibilityLabel='More options'
-            accessibilityHint='Lets you choose the color chatinterface.'
+            accessibilityLabel='Start Chatting'
+            accessibilityHint='Let you start chatting'
             style={styles.chatButton}
             onPress={() => this.onPressChat(this.state.name, this.state.backgroundColor)}>
             <Text style={styles.chatbuttontext}>Start Chatting</Text>    
