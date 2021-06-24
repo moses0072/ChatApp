@@ -20,7 +20,7 @@ export default class App extends React.Component {
       //Wrap the app within NavigationContainer in order for react navigttion to work
       <NavigationContainer>
         <Stack.Navigator initialRouteName='Start'>
-          <Stack.Screen name='Start' component={Start} />
+          <Stack.Screen name='Start' component={Start} options={{ headerShown: false }}/>
           <Stack.Screen name='Chat' component={Chat} />
         </Stack.Navigator>
       </NavigationContainer>  

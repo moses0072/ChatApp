@@ -3,6 +3,9 @@ import { View, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 
 import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
 
+import MapView from 'react-native-maps';
+import CustomActions from './CustomActions';
+
 import firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -31,6 +34,7 @@ export default class Chat extends React.Component {
         avatar: '',
       },
       isConnected: false,
+      image: null,
     }    
     //config allow the app to connect to Firestore
     if (!firebase.apps.length) {
@@ -77,6 +81,7 @@ export default class Chat extends React.Component {
 
   componentWillUnmount() {
     this.unsubscribe();
+    this.authUnsubscribe();
   }
 
   //Update the messages
@@ -101,6 +106,8 @@ export default class Chat extends React.Component {
       createdAt: message.createdAt,
       text: message.text || null,
       user: message.user,
+      image: message.image || null,
+      location: message.location || null,
     });
   }
 
@@ -120,6 +127,8 @@ export default class Chat extends React.Component {
           name: data.user.name,
           avatar: data.user.avatar,
         },
+        image: data.image || null,
+        location: data.location || null,
       }); //console.log(data.text);3
     });
     this.setState({
@@ -188,6 +197,33 @@ export default class Chat extends React.Component {
     }
   }
 
+  //Displays additional communication features (photos, camera, map)
+  renderCustomActions = props => <CustomActions {...props} />;
+
+  // returns custom map view
+  renderCustomView = props => {
+    const {currentMessage} = props;
+    if (currentMessage.location) {
+      return (
+        <MapView
+          style={{
+            width: 150,
+            height: 100,
+            borderRadius: 13,
+            margin: 3,
+          }}
+          region={{
+            latitude: Number(currentMessage.location.latitude),
+            longitude: Number(currentMessage.location.longitude),
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      );
+    }
+    return null;
+  };
+
   render() {   
     let backgroundColor = this.props.route.params.backgroundColor;
 
@@ -195,11 +231,15 @@ export default class Chat extends React.Component {
       <View style={[styles.container, { backgroundColor: backgroundColor }]}>
         <GiftedChat
           renderBubble={this.renderBubble }
-          renderInputToolbar={this.renderInputToolbar} 
+          renderInputToolbar={this.renderInputToolbar}
+          renderUsernameOnMessage={true}
+          renderActions={this.renderCustomActions}
+          renderCustomView={this.renderCustomView}
           messages={this.state.messages}
           onSend={(messages) => this.onSend(messages)}
           user={this.state.user}
         />
+        {/* Android keyboard fix */}
         { Platform.OS === 'android' ? <KeyboardAvoidingView behavior='height' /> : null }
       </View>
     );
